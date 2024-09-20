@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
-import reader.ReadFile;
+import client.mundo.ReadFile;
 
 public class HelloSocket implements Runnable {
 
