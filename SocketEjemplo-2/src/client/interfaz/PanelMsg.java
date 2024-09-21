@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingWorker;
 
 /**
  *
@@ -46,28 +45,12 @@ public class PanelMsg extends JPanel implements ActionListener {
         textFieldEnviar.setText("");
     }
     
-  @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enviar")) {
             String message = getMessage();
-            clearMessage();
-            // Ejecuta la tarea en un hilo en segundo plano
-            new SendMessageTask(message).execute();
-        }
-    }
-
-    private class SendMessageTask extends SwingWorker<Void, Void> {
-        private String message;
-
-        public SendMessageTask(String message) {
-            this.message = message;
-        }
-
-        @Override
-        protected Void doInBackground() throws Exception {
-            // Envía el mensaje en un hilo en segundo plano
-            helloSocket.socket(message);
-            return null;
+            helloSocket.socket(message); 
+            clearMessage(); 
         }
     }
     
