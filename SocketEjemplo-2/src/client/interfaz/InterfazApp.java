@@ -27,7 +27,7 @@ public class InterfazApp extends JFrame {
         setLocationRelativeTo(null);
 
         readFile = new ReadFile();
-        helloSocket = new HelloSocket();
+       
         
         // Instanciar los paneles
         panelIp = new PanelIp();

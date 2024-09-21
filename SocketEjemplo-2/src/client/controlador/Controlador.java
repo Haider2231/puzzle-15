@@ -28,6 +28,9 @@ public class Controlador {
 
     }
 
+    // --------------------------------------------------------------	
+    // Implementacion de los requerimientos de usuario.	
+    // --------------------------------------------------------------
     public void socket(String msg) {
         helloSocket.socket(msg);
     }
