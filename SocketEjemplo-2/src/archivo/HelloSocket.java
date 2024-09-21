@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class HelloSocket implements Runnable {
 
@@ -16,8 +17,8 @@ public class HelloSocket implements Runnable {
     private String userName;
     
     /* Constructor */
-    public HelloSocket(PanelChat panelChat) {
-        this.panelChat = panelChat;
+    public HelloSocket() {
+        panelChat = new PanelChat();
         readFile = new ReadFile();
         readFile.leerConfiguracion("archivo1.in");
         this.userName = readFile.getConfiguracion(1);
@@ -58,9 +59,9 @@ public class HelloSocket implements Runnable {
             while (true) {
                 socket = serverSocket.accept();
                 inDataBuffer = new DataInputStream(socket.getInputStream());
-                String msg = inDataBuffer.readUTF();
-                panelChat.addMessage(msg);
-        
+                String msg = userName + ": "+ inDataBuffer.readUTF();
+                  //  panelChat.addMessage(msg);
+                    SwingUtilities.invokeLater(() -> panelChat.addMessage(msg));
                 socket.close();
             }
         } catch (IOException e) {

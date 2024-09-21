@@ -19,21 +19,21 @@ public class InterfazApp extends JFrame {
 
     public InterfazApp(Controlador ctrl) {
         this.ctrl = ctrl;
-        this.readFile = new ReadFile();
-        //     ctrl.socket("Client: Hello server...");
+
         setTitle("Personal Chat");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
 
+        readFile = new ReadFile();
+        helloSocket = new HelloSocket();
+        
         // Instanciar los paneles
-        panelChat = new PanelChat();
-        helloSocket = new HelloSocket(panelChat);
         panelIp = new PanelIp();
         panelNick = new PanelNick();
         panelChat = new PanelChat();
-        panelMsg = new PanelMsg(helloSocket);
+        panelMsg = new PanelMsg(ctrl);
 
         panelIp.setBounds(10, 10, 180, 40);
         panelNick.setBounds(10, 10, 380, 40);
@@ -45,7 +45,7 @@ public class InterfazApp extends JFrame {
         add(panelChat);
         add(panelMsg);
 
-        ctrl.conectar(readFile, panelIp, panelNick,helloSocket);
+        ctrl.conectar(readFile, panelIp, panelNick);
         ctrl.cargarConfiguracion();
 
     }

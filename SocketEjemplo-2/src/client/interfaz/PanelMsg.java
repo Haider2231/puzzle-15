@@ -5,6 +5,7 @@
 package client.interfaz;
 
 import archivo.HelloSocket;
+import client.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -19,24 +20,23 @@ public class PanelMsg extends JPanel implements ActionListener {
 
     private JTextField textFieldEnviar;
     private JButton buttonSend;
-      private HelloSocket helloSocket;
+    private Controlador ctrl;
 
-    public PanelMsg(HelloSocket helloSocket) {
-        this.helloSocket = helloSocket;
+    public PanelMsg(Controlador ctrl) {
+        this.ctrl = ctrl;
         setLayout(null);
-        
+
         textFieldEnviar = new JTextField(25);
         buttonSend = new JButton("enviar");
         buttonSend.addActionListener(this);
-        
-      textFieldEnviar.setBounds(10, 10, 250, 30);
+
+        textFieldEnviar.setBounds(10, 10, 250, 30);
         buttonSend.setBounds(270, 10, 90, 30);
-                
+
         add(textFieldEnviar);
         add(buttonSend);
     }
-    
-    
+
     public String getMessage() {
         return textFieldEnviar.getText();
     }
@@ -44,14 +44,14 @@ public class PanelMsg extends JPanel implements ActionListener {
     public void clearMessage() {
         textFieldEnviar.setText("");
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enviar")) {
             String message = getMessage();
-            helloSocket.socket(message); 
-            clearMessage(); 
+            ctrl.socket(message);
+            clearMessage();
         }
     }
-    
+
 }

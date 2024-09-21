@@ -16,23 +16,18 @@ public class Controlador {
 
     // Constructor	
     public Controlador() {
-        //  helloSocket = new HelloSocket();
+         helloSocket = new HelloSocket();
     
-
     }
 
     // Recibe las referencias de los objetos a controlar en la interfaz	
-    public void conectar(ReadFile readFile, PanelIp panelIP, PanelNick panelNick,HelloSocket helloSocket) {
-        this.helloSocket = helloSocket;
+    public void conectar(ReadFile readFile, PanelIp panelIP, PanelNick panelNick) {
         this.readFile = readFile;
         this.panelIP = panelIP;
         this.panelNick = panelNick;
 
     }
 
-    // --------------------------------------------------------------	
-    // Implementacion de los requerimientos de usuario.	
-    // --------------------------------------------------------------
     public void socket(String msg) {
         helloSocket.socket(msg);
     }
