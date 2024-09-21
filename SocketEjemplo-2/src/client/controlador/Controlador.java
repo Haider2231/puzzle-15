@@ -16,7 +16,7 @@ public class Controlador {
 
     // Constructor	
     public Controlador() {
-         helloSocket = new HelloSocket();
+       helloSocket = new HelloSocket();
     
     }
 
@@ -25,7 +25,7 @@ public class Controlador {
         this.readFile = readFile;
         this.panelIP = panelIP;
         this.panelNick = panelNick;
-
+       
     }
 
     // --------------------------------------------------------------	
