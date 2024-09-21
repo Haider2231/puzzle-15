@@ -4,6 +4,7 @@ import client.interfaz.PanelChat;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -26,24 +27,26 @@ public class HelloSocket implements Runnable {
     }
 
     /* Client:Data >> Socket >> Server */
-    public void socket(String msg) {
-        try {
+       public void socket(String msg) {
+        new Thread(() -> {
+            try {
+                String ip = readFile.getConfiguracion(2); // Obtiene la IP
+                int puertoEntrada = Integer.parseInt(readFile.getConfiguracion(3));
 
-            String ip = readFile.getConfiguracion(2); // Obtiene la IP
-            int puertoEntrada = Integer.parseInt(readFile.getConfiguracion(3));
+                Socket client = new Socket();
+                client.connect(new InetSocketAddress(ip, puertoEntrada), 5000); // Timeout de 5000 ms
 
-            Socket client = new Socket(ip, puertoEntrada); // portSend 5000
-            DataOutputStream outBuffer = new DataOutputStream(client.getOutputStream());
-            outBuffer.writeUTF(msg);
-            client.close();
-
-        } catch (UnknownHostException e) {
-            JOptionPane.showMessageDialog(null, "Client: socket(1) : UnknownHostException: " + e.getMessage());
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Client: socket(2) : IOException: " + e.getMessage());
-        }
+                DataOutputStream outBuffer = new DataOutputStream(client.getOutputStream());
+                String formatMessage = userName + ": " + msg; 
+                outBuffer.writeUTF(formatMessage);
+                client.close();
+            } catch (UnknownHostException e) {
+                JOptionPane.showMessageDialog(null, "Client: socket(1) : UnknownHostException: " + e.getMessage());
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Client: socket(2) : IOException: " + e.getMessage());
+            }
+        }).start();
     }
-
     @Override
     /* Client: Listen */
     public void run() {
@@ -60,7 +63,7 @@ public class HelloSocket implements Runnable {
                 inDataBuffer = new DataInputStream(socket.getInputStream());
                
                 String msg = userName + ": "+ inDataBuffer.readUTF();
-                    panelChat.addMessage(msg);
+                panelChat.addMessage(msg);
                    
                 socket.close();
             }

@@ -26,11 +26,9 @@ public class InterfazApp extends JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
 
-        
-      
+    
        readFile = new ReadFile();
 
-    
         // Instanciar los paneles
         panelIp = new PanelIp();
         panelNick = new PanelNick();
