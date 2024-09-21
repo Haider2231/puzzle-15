@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
-import client.mundo.ReadFile;
+import archivo.ReadFile;
 
 public class HelloSocket implements Runnable {
 
@@ -19,7 +19,7 @@ public class HelloSocket implements Runnable {
     /* Constructor */
     public HelloSocket() {
         readFile = new ReadFile();
-        config = readFile.leerConfiguracion("archivo2.in");
+      //  config = readFile.leerConfiguracion("archivo2.in");
         Thread treadListener = new Thread(this);
         treadListener.start();
     }

@@ -1,5 +1,4 @@
-
-package client.mundo;
+package archivo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,20 +10,24 @@ import java.io.InputStreamReader;
  * @author ASUS
  */
 public class ReadFile {
-    
-   
-    public String[] leerConfiguracion(String archivo) {
-        String[] config = new String[3];
+
+    private String[] config;
+
+    public ReadFile() {
+        this.config = new String[5];
+    }
+
+    public void leerConfiguracion(String archivo) {
 
         try {
-            InputStream input = getClass().getResourceAsStream("/reader/" + archivo);
+            InputStream input = getClass().getResourceAsStream("/archivo/" + archivo);
             if (input == null) {
                 System.out.println("No se encontró el archivo: " + archivo);
-                return null;
+                return;
             }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 5; i++) {
                 config[i] = reader.readLine();
             }
             reader.close();
@@ -32,6 +35,12 @@ public class ReadFile {
             System.out.println("Error leyendo el archivo de configuración: " + e.getMessage());
         }
 
-        return config;
     }
+
+    public String getConfiguracion(int index) {
+        return config[index];
+
+    }
+
+  
 }

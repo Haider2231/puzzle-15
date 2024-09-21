@@ -1,5 +1,6 @@
-package client.mundo;
+package archivo;
 
+import client.interfaz.PanelChat;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,13 +12,15 @@ import javax.swing.JOptionPane;
 public class HelloSocket implements Runnable {
 
     private ReadFile readFile;
-    private String[] config;
+    private PanelChat panelChat;
+    private String userName;
     
     /* Constructor */
-    public HelloSocket() {
-        
+    public HelloSocket(PanelChat panelChat) {
+        this.panelChat = panelChat;
         readFile = new ReadFile();
-        config = readFile.leerConfiguracion("archivo1.in");
+        readFile.leerConfiguracion("archivo1.in");
+        this.userName = readFile.getConfiguracion(1);
         Thread treadListener = new Thread(this);
         treadListener.start();
     }
@@ -25,15 +28,15 @@ public class HelloSocket implements Runnable {
     /* Client:Data >> Socket >> Server */
     public void socket(String msg) {
         try {
-            
-            String ip = config[0]; // Obtiene la IP
-            int puertoEntrada = Integer.parseInt(config[1]);
-            
+
+            String ip = readFile.getConfiguracion(2); // Obtiene la IP
+            int puertoEntrada = Integer.parseInt(readFile.getConfiguracion(3));
+
             Socket client = new Socket(ip, puertoEntrada); // portSend 5000
             DataOutputStream outBuffer = new DataOutputStream(client.getOutputStream());
             outBuffer.writeUTF(msg);
             client.close();
-            
+
         } catch (UnknownHostException e) {
             JOptionPane.showMessageDialog(null, "Client: socket(1) : UnknownHostException: " + e.getMessage());
         } catch (IOException e) {
@@ -49,14 +52,15 @@ public class HelloSocket implements Runnable {
         DataInputStream inDataBuffer;
 
         try {
-            int portListen = Integer.parseInt(config[2]);
+            int portListen = Integer.parseInt(readFile.getConfiguracion(4));
             serverSocket = new ServerSocket(portListen); // portListen 5050
 
             while (true) {
                 socket = serverSocket.accept();
                 inDataBuffer = new DataInputStream(socket.getInputStream());
                 String msg = inDataBuffer.readUTF();
-                System.out.println(msg);
+                panelChat.addMessage(msg);
+        
                 socket.close();
             }
         } catch (IOException e) {
