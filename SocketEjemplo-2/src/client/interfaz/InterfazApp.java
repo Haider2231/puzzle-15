@@ -45,7 +45,7 @@ public class InterfazApp extends JFrame {
         add(panelChat);
         add(panelMsg);
 
-        ctrl.conectar(readFile, panelIp, panelNick);
+        ctrl.conectar(readFile, panelIp, panelNick,panelChat);
         ctrl.cargarConfiguracion();
         
     }

@@ -4,6 +4,7 @@ import client.interfaz.PanelIp;
 import client.interfaz.PanelNick;
 import archivo.HelloSocket;
 import archivo.ReadFile;
+import client.interfaz.PanelChat;
 
 public class Controlador {
     // Atributos
@@ -13,6 +14,7 @@ public class Controlador {
     private ReadFile readFile;
     private PanelIp panelIP;
     private PanelNick panelNick;
+    private PanelChat panelChat;
 
     // Constructor	
     public Controlador() {
@@ -21,10 +23,11 @@ public class Controlador {
     }
 
     // Recibe las referencias de los objetos a controlar en la interfaz	
-    public void conectar(ReadFile readFile, PanelIp panelIP, PanelNick panelNick) {
+    public void conectar(ReadFile readFile, PanelIp panelIP, PanelNick panelNick, PanelChat panelChat) {
         this.readFile = readFile;
         this.panelIP = panelIP;
         this.panelNick = panelNick;
+        this.panelChat = panelChat;
        
     }
 
@@ -32,7 +35,9 @@ public class Controlador {
     // Implementacion de los requerimientos de usuario.	
     // --------------------------------------------------------------
     public void socket(String msg) {
+        panelChat.addMessage(msg);
         helloSocket.socket(msg);
+        
     }
 
     public void cargarConfiguracion() {

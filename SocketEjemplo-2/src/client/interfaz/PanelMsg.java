@@ -49,6 +49,7 @@ public class PanelMsg extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enviar")) {
             String message = getMessage();
+            System.out.println(message);
             ctrl.socket(message);
             clearMessage();
         }

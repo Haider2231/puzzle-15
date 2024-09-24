@@ -23,11 +23,12 @@ public class PanelChat extends JPanel {
         textAreaChat = new JTextArea(15, 30);
         textAreaChat.setEditable(false);
 
-         scrollPaneChat = new JScrollPane(textAreaChat);
+        scrollPaneChat = new JScrollPane(textAreaChat);
         
-          scrollPaneChat.setBounds(10, 10, 350, 200);
+        scrollPaneChat.setBounds(10, 10, 350, 200);
         
         add(scrollPaneChat);
+        
     }
 
     public void addMessage(String message) {

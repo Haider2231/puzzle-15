@@ -30,6 +30,7 @@ public class HelloSocket implements Runnable {
        public void socket(String msg) {
         new Thread(() -> {
             try {
+                 
                 String ip = readFile.getConfiguracion(2); // Obtiene la IP
                 int puertoEntrada = Integer.parseInt(readFile.getConfiguracion(3));
 
