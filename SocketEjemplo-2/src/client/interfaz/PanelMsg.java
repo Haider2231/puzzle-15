@@ -20,10 +20,12 @@ public class PanelMsg extends JPanel implements ActionListener {
 
     private JTextField textFieldEnviar;
     private JButton buttonSend;
+    private PanelChat panelChat;
     private Controlador ctrl;
-
-    public PanelMsg(Controlador ctrl) {
+    
+    public PanelMsg(PanelChat panelChat, Controlador ctrl) {
         this.ctrl = ctrl;
+        this.panelChat = panelChat;
         setLayout(null);
 
         textFieldEnviar = new JTextField(25);
@@ -49,7 +51,7 @@ public class PanelMsg extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enviar")) {
             String message = getMessage();
-            System.out.println(message);
+            panelChat.addMessage(message);
             ctrl.socket(message);
             clearMessage();
         }

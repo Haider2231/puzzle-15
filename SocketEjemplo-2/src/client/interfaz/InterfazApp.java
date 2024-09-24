@@ -33,7 +33,7 @@ public class InterfazApp extends JFrame {
         panelIp = new PanelIp();
         panelNick = new PanelNick();
         panelChat = new PanelChat();
-        panelMsg = new PanelMsg(ctrl);
+        panelMsg = new PanelMsg(panelChat,ctrl);
 
         panelIp.setBounds(10, 10, 180, 40);
         panelNick.setBounds(10, 10, 380, 40);
@@ -45,7 +45,7 @@ public class InterfazApp extends JFrame {
         add(panelChat);
         add(panelMsg);
 
-        ctrl.conectar(readFile, panelIp, panelNick,panelChat);
+        ctrl.conectar(readFile, panelIp, panelNick);
         ctrl.cargarConfiguracion();
         
     }

@@ -22,20 +22,18 @@ public class Controlador {
     
     }
 
-    // Recibe las referencias de los objetos a controlar en la interfaz	
-    public void conectar(ReadFile readFile, PanelIp panelIP, PanelNick panelNick, PanelChat panelChat) {
+    // Recibe las referencias de los objetos a controlar en la interfaz     
+    public void conectar(ReadFile readFile, PanelIp panelIP, PanelNick panelNick) {
         this.readFile = readFile;
         this.panelIP = panelIP;
-        this.panelNick = panelNick;
-        this.panelChat = panelChat;
-       
+        this.panelNick = panelNick; 
     }
 
     // --------------------------------------------------------------	
     // Implementacion de los requerimientos de usuario.	
     // --------------------------------------------------------------
     public void socket(String msg) {
-        panelChat.addMessage(msg);
+        
         helloSocket.socket(msg);
         
     }

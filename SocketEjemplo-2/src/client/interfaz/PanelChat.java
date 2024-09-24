@@ -4,6 +4,7 @@
  */
 package client.interfaz;
 
+import client.controlador.Controlador;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,7 +17,9 @@ import javax.swing.JTextArea;
 public class PanelChat extends JPanel {
 
     private JTextArea textAreaChat;
-    private   JScrollPane scrollPaneChat ;
+    private JScrollPane scrollPaneChat;
+    private Controlador ctrl;
+     
     public PanelChat() {
         setLayout(null);
 
