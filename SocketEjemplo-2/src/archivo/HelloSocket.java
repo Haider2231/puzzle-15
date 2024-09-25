@@ -28,15 +28,14 @@ public class HelloSocket implements Runnable {
 
     /* Client:Data >> Socket >> Server */
        public void socket(String msg) {
-        new Thread(() -> {
+        
             try {
-                 
+                  
                 String ip = readFile.getConfiguracion(2); // Obtiene la IP
                 int puertoEntrada = Integer.parseInt(readFile.getConfiguracion(3));
 
                 Socket client = new Socket();
-                client.connect(new InetSocketAddress(ip, puertoEntrada), 5000); // Timeout de 5000 ms
-
+                
                 DataOutputStream outBuffer = new DataOutputStream(client.getOutputStream());
                 String formatMessage = userName + ": " + msg; 
                 outBuffer.writeUTF(formatMessage);
@@ -46,7 +45,7 @@ public class HelloSocket implements Runnable {
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Client: socket(2) : IOException: " + e.getMessage());
             }
-        }).start();
+       
     }
     @Override
     /* Client: Listen */
