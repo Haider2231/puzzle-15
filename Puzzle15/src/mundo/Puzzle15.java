@@ -68,40 +68,33 @@ public class Puzzle15 extends Logic {
         }
     }
 
-    public String moverArriba() {
+    public void moverArriba() {
         if (filaVacia > 0) {
             intercambiar(filaVacia, columnaVacia, filaVacia - 1, columnaVacia);
             filaVacia--;
-            return "U";
         }
-        return "";
-    }
+   }
 
-    public String moverAbajo() {
+    public void moverAbajo() {
         if (filaVacia < 3) {
             intercambiar(filaVacia, columnaVacia, filaVacia + 1, columnaVacia);
             filaVacia++;
-            return "D";
         }
-        return "";
     }
 
-    public String moverIzquierda() {
+    public void moverIzquierda() {
         if (columnaVacia > 0) {
             intercambiar(filaVacia, columnaVacia, filaVacia, columnaVacia - 1);
             columnaVacia--;
-            return "L";
         }
-        return "";
+
     }
 
-    public String moverDerecha() {
+    public void moverDerecha() {
         if (columnaVacia < 3) {
             intercambiar(filaVacia, columnaVacia, filaVacia, columnaVacia + 1);
             columnaVacia++;
-            return "R";
         }
-        return "";
     }
 
     private void intercambiar(int fila1, int col1, int fila2, int col2) {
@@ -112,7 +105,7 @@ public class Puzzle15 extends Logic {
 
     public void mezclarTablero() {
         Random rand = new Random();
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 70; i++) {
             int movimiento = rand.nextInt(4);
             switch (movimiento) {
                 case 0:

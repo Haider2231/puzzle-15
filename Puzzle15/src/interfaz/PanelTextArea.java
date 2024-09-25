@@ -16,8 +16,9 @@ public class PanelTextArea extends JPanel {
     private JTextArea textArea;
 
     public PanelTextArea() {
+        setLayout(null);
         textArea = new JTextArea();
-        textArea.setBounds(50, 200, 200, 300);
+       textArea.setBounds(10, 10, 400, 40); 
         textArea.setEditable(false);
         add(textArea);
 

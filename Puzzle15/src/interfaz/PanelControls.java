@@ -16,51 +16,41 @@ import mundo.Puzzle15;
  *
  * @author ASUS
  */
-public class PanelControls extends JPanel implements ActionListener{
-    
+public class PanelControls extends JPanel implements ActionListener {
+
     private Puzzle15 puzzle;
     private PanelTablero panelTablero;
- 
-     private JButton btnNewGame;
-      private JButton btnSolve;
-    private Controlador ctrl;  
 
-    public PanelControls(Puzzle15 puzzle, PanelTablero panelTablero ,Controlador ctrl ) {
+    private JButton btnNewGame;
+    private JButton btnSolve;
+    private Controlador ctrl;
+
+    public PanelControls(Puzzle15 puzzle, PanelTablero panelTablero, Controlador ctrl) {
         this.puzzle = puzzle;
         this.ctrl = ctrl;
         this.panelTablero = panelTablero;
-  
+
         setLayout(null);
         btnNewGame = new JButton("New Game");
         btnNewGame.addActionListener(this);
         btnNewGame.setBounds(50, 20, 100, 35);
         add(btnNewGame);
-        
+
         btnSolve = new JButton("Solve");
         btnSolve.addActionListener(this);
         btnSolve.setBounds(300, 20, 100, 35);
-         add(btnSolve); 
-         
-         
+        add(btnSolve);
+
     }
-    
-   
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("New Game")) {
-           ctrl.iniciarNuevoJuego();
-        }else if (e.getActionCommand().equals("Solve")) {
-       ctrl.resolverPuzzle();
+            ctrl.iniciarNuevoJuego();
+        } else if (e.getActionCommand().equals("Solve")) {
+            ctrl.solve();
         }
-   
-    }
-    
 
-    private void resolverPuzzle() {
-      
-       // textArea.setText("");
     }
-    
-    
-    
+
 }

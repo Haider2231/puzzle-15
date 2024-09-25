@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import mundo.Puzzle15;
+import mundo.Solucion;
 
 /**
  *
@@ -25,12 +26,13 @@ public class InterfazApp extends JFrame {
     private Controlador ctrl;
     private PanelTitulo pnlTitulo;
     private PanelTextArea pnlTextArea;
+    private Solucion solve;
 
     public InterfazApp(Controlador ctrl) {
 
         this.ctrl = ctrl;
 
-        setSize(480, 720);
+        setSize(480, 680);
         setTitle("PUZZLE 15");
    
         setLocationRelativeTo(null);
@@ -42,16 +44,16 @@ public class InterfazApp extends JFrame {
         pnlControls = new PanelControls(puzzle, pnlTablero, ctrl);
         pnlTitulo = new PanelTitulo();
         pnlTextArea = new PanelTextArea();
-        
-        pnlTitulo.setBounds(110, 20, 230, 50);
+        solve = new Solucion(puzzle,ctrl);
+        pnlTitulo.setBounds(110, 20, 230, 50);  
         add(pnlTitulo);
         pnlTablero.setBounds(25, 100, 410, 410);
         add(pnlTablero);
-        pnlControls.setBounds(25, 510, 400, 100);
+        pnlControls.setBounds(25, 500, 400, 70);
         add(pnlControls);
-        pnlTextArea.setBounds(25, 50, 400, 40);
+        pnlTextArea.setBounds(25, 560, 400, 60); 
         add(pnlTextArea);
-        ctrl.conectar(puzzle, pnlTablero, pnlControls);
+        ctrl.conectar(puzzle, pnlTablero, pnlControls,pnlTextArea,solve);
     }
 
     public static void main(String[] args) {
