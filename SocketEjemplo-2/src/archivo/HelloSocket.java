@@ -38,6 +38,7 @@ public class HelloSocket implements Runnable {
                 
                 DataOutputStream outBuffer = new DataOutputStream(client.getOutputStream());
                 String formatMessage = userName + ": " + msg; 
+                panelChat.addMessage(formatMessage);
                 outBuffer.writeUTF(formatMessage);
                 client.close();
             } catch (UnknownHostException e) {
