@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- *
- * @author ASUS
- */
 public class ReadFile {
 
     private String[] config;
@@ -42,5 +38,4 @@ public class ReadFile {
 
     }
 
-  
 }

@@ -3,55 +3,52 @@ package client.interfaz;
 import archivo.HelloSocket;
 import client.controlador.Controlador;
 import archivo.ReadFile;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class InterfazApp extends JFrame {
 
-    /* Relaciones */
-    // private Controlador ctrl;
-    private PanelNick panelNick;
-    private PanelChat panelChat;
-    private PanelMsg panelMsg;
-    private PanelIp panelIp;
+    private PanelChat pnlChat;
+    private PanelMsg pnlMsg;
+    private PanelTop pnlTop; // Reemplazar PanelTop
+
     private Controlador ctrl;
     private ReadFile readFile;
-    private HelloSocket helloSocket;
 
-    public InterfazApp(Controlador ctrl) {
-        this.ctrl = ctrl;
-
-        setTitle("Personal Chat");
-        setSize(400, 400);
+    public InterfazApp() {
+        setTitle("Chat");
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
+        setBackground(new Color(240, 240, 240)); // Color de fondo neumórfico
 
-    
-       readFile = new ReadFile();
-
+        readFile = new ReadFile();
+        
+        //Imagen a la barra de tareas
+        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/icon1.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
+        
         // Instanciar los paneles
-        panelIp = new PanelIp();
-        panelNick = new PanelNick();
-        panelChat = new PanelChat();
-        panelMsg = new PanelMsg(panelChat,ctrl);
+        pnlTop = new PanelTop(); // Crear PanelTop en el que está el pnlIP  y pnlNick
+        pnlChat = new PanelChat();
+        ctrl = new Controlador(pnlChat); 
+        pnlMsg = new PanelMsg(pnlChat, ctrl);
 
-        panelIp.setBounds(10, 10, 180, 40);
-        panelNick.setBounds(10, 10, 380, 40);
-        panelChat.setBounds(10, 60, 380, 250);
-        panelMsg.setBounds(10, 300, 380, 50);
+        // Agregar paneles
+        add(pnlTop, BorderLayout.NORTH);
+        add(pnlChat, BorderLayout.CENTER);
+        add(pnlMsg, BorderLayout.SOUTH);
 
-        add(panelIp);
-        add(panelNick);
-        add(panelChat);
-        add(panelMsg);
-
-        ctrl.conectar(readFile, panelIp, panelNick);
+        ctrl.conectar(readFile, pnlTop.getPanelIp(), pnlTop.getPanelNick());
         ctrl.cargarConfiguracion();
         
+        setVisible(true);
     }
 
     public static void main(String[] args) {
-        InterfazApp frmMain = new InterfazApp(new Controlador());
-        frmMain.setVisible(true);
+        new InterfazApp();
     }
 }
+

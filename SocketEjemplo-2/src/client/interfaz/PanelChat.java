@@ -1,40 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package client.interfaz;
 
 import client.controlador.Controlador;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
+import java.awt.*;
 
-/**
- *
- * @author asus
- */
 public class PanelChat extends JPanel {
 
-    private JTextArea textAreaChat;
-    private JScrollPane scrollPaneChat;
-    private Controlador ctrl;
-     
+    private JTextArea txtArena;
+
     public PanelChat() {
-        setLayout(null);
+        setLayout(new BorderLayout());
+        setBackground(new Color(255, 255, 255, 240)); // Fondo neumórfico
 
-        textAreaChat = new JTextArea(15, 30);
-        textAreaChat.setEditable(false);
+        txtArena = new JTextArea();
+        txtArena.setEditable(false);
+        txtArena.setFont(new Font("Arial", Font.PLAIN, 14));
+        txtArena.setLineWrap(true);
+        txtArena.setWrapStyleWord(true);
+        txtArena.setOpaque(false);
+        txtArena.setMargin(new Insets(10, 10, 10, 10));
 
-        scrollPaneChat = new JScrollPane(textAreaChat);
+        JScrollPane scrlChat = new JScrollPane(txtArena);
+        scrlChat.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(0, 0, 0, 50), 1),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         
-        scrollPaneChat.setBounds(10, 10, 350, 200);
-        
-        add(scrollPaneChat);
-        
+        add(scrlChat, BorderLayout.CENTER);
     }
 
     public void addMessage(String message) {
-        textAreaChat.append(message + "\n");
+        txtArena.append(message + "\n");
     }
 }

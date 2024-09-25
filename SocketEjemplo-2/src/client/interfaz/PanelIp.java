@@ -1,38 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package client.interfaz;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
 
-/**
- *
- * @author asus
- */
 public class PanelIp extends JPanel {
 
-    private JTextField textFieldIP;
-    private JLabel labelIP;
+    private JTextField txtFielIP;
+    private JLabel lblIP;
 
     public PanelIp() {
-        setLayout(null);
-        labelIP = new JLabel("IP:");
-        textFieldIP = new JTextField(15);
-        textFieldIP.setEditable(false);
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        setBackground(new Color(255, 255, 255, 240)); // Fondo neumórfico
 
-        labelIP.setBounds(10, 10, 30, 20);
-        textFieldIP.setBounds(50, 10, 120, 20);
-        add(labelIP);
-        add(textFieldIP);
+        lblIP = new JLabel("IP:");
+        txtFielIP = new JTextField(15);
+        txtFielIP.setEditable(false);
+        txtFielIP.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(0, 0, 0, 50), 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+
+        add(lblIP);
+        add(txtFielIP);
     }
 
     public void setIP(String ip) {
-        textFieldIP.setText(ip);
+        txtFielIP.setText(ip);
     }
-
-   
-
 }
+

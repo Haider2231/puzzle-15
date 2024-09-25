@@ -17,8 +17,9 @@ public class Controlador {
     private PanelChat panelChat;
 
     // Constructor	
-    public Controlador() {
-       helloSocket = new HelloSocket();
+    public Controlador(PanelChat panelChat) {
+        this.panelChat = panelChat;
+        helloSocket = new HelloSocket(panelChat);
     
     }
 

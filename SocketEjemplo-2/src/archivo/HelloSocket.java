@@ -17,8 +17,8 @@ public class HelloSocket implements Runnable {
     private String userName;
     
     /* Constructor */
-    public HelloSocket() {
-        panelChat = new PanelChat();
+    public HelloSocket(PanelChat panelChat) {
+        this.panelChat = panelChat;
         readFile = new ReadFile();
         readFile.leerConfiguracion("archivo1.in");
         this.userName = readFile.getConfiguracion(1);
@@ -35,11 +35,10 @@ public class HelloSocket implements Runnable {
                 int puertoEntrada = Integer.parseInt(readFile.getConfiguracion(3));
 
                 Socket client = new Socket();
-                
+                client.connect(new InetSocketAddress(ip, puertoEntrada), 5000); // Timeout de 5000 ms
+               
                 DataOutputStream outBuffer = new DataOutputStream(client.getOutputStream());
-                String formatMessage = userName + ": " + msg; 
-                panelChat.addMessage(formatMessage);
-                outBuffer.writeUTF(formatMessage);
+                outBuffer.writeUTF(msg);
                 client.close();
             } catch (UnknownHostException e) {
                 JOptionPane.showMessageDialog(null, "Client: socket(1) : UnknownHostException: " + e.getMessage());
@@ -57,15 +56,15 @@ public class HelloSocket implements Runnable {
 
         try {
             int portListen = Integer.parseInt(readFile.getConfiguracion(4));
-            serverSocket = new ServerSocket(portListen); // portListen 5050
+            serverSocket = new ServerSocket(portListen); 
 
+            
             while (true) {
                 socket = serverSocket.accept();
                 inDataBuffer = new DataInputStream(socket.getInputStream());
-               
-                String msg = userName + ": "+ inDataBuffer.readUTF();
-                panelChat.addMessage(msg);
-                   
+                String message = inDataBuffer.readUTF();
+                
+               panelChat.addMessage(readFile.getConfiguracion(1) + ": " + message);
                 socket.close();
             }
         } catch (IOException e) {
